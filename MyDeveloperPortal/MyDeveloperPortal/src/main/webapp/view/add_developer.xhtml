@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="../layout.xhtml">
+
+	<ui:define name="content">
+		<div class="ui-g-6">
+		<h:form id="developerForm">
+			<p:panel header="Add Developer" style="background-color: #939894;">
+				<h:panelGrid columns="1"><br />
+
+					<!-- <p:outputLabel style="color: white" for="name" value="Name: " /> -->
+					<p:inputText id="name"  placeholder="Name" value="#{createDeveloper.developerItems.name}" /><br />
+
+					<!-- <p:outputLabel style="color: white" for="email" value="Email: " /> -->
+					<p:inputText type="email" placeholder="Email" id="email" value="#{createDeveloper.developerItems.email}" /><br />
+
+					<p:outputLabel style="color: white" for="skills"  value="Skills: " />
+					<p:selectOneMenu id="skills" value="#{createDeveloper.developerItems.skills}" >
+						<f:selectItems var="skill" itemValue = "#{skill.skills}"
+									   itemLabel = "#{skill.skills}" value="#{createDeveloper.listOfSkills}" />
+					</p:selectOneMenu>
+					<br />
+
+					<br />
+					<p:commandButton value="Submit" action="#{createDeveloper.submitForm}" />
+
+				</h:panelGrid>
+			</p:panel>
+		</h:form>
+		</div>
+	</ui:define>
+
+
+</ui:composition>
+</html>
