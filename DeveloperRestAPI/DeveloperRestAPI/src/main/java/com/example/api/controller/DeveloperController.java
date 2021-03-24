@@ -24,6 +24,7 @@ import com.example.api.service.DeveloperService;
 @RestController
 @RequestMapping("/developers")
 public class DeveloperController {
+	final Map<String, Object> map = new HashMap<>();
 
 	@Autowired
 	DeveloperService developerService;
@@ -31,8 +32,9 @@ public class DeveloperController {
 	@PostMapping
 	public ResponseEntity<?> createDeveloper(@RequestBody Developer developerData) {
 
-		Developer postDeveloper = developerService.createDeveloper(developerData);
-		return new ResponseEntity<>(postDeveloper, HttpStatus.CREATED);
+		developerService.createDeveloper(developerData);
+		map.put("message", "Developer created Successfully");
+		return new ResponseEntity<Map>(map, HttpStatus.CREATED);
 	}
 
 	@GetMapping
@@ -48,8 +50,9 @@ public class DeveloperController {
 		if (id < 0) {
 			throw new CustomException("id less than zero");
 		}
-		Developer putDeveloper = developerService.updateDeveloper(developerData, id);
-		return new ResponseEntity<>(putDeveloper, HttpStatus.OK);
+		developerService.updateDeveloper(developerData, id);
+		map.put("message", "Developer Updated Successfully");
+		return new ResponseEntity<Map>(map, HttpStatus.OK);
 
 	}
 
@@ -60,8 +63,7 @@ public class DeveloperController {
 			throw new CustomException("id less than zero");
 		}
 		developerService.deleteDeveloper(id);
-		Map<String, Object> map = new HashMap<>();
-		map.put("message", "Record deleted : " + id);
+		map.put("message", "Developer deleted Successfully: " + id);
 		return new ResponseEntity<Map>(map, HttpStatus.OK);
 	}
 
